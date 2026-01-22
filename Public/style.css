@@ -1,0 +1,23 @@
+body {
+
+    background-color: rgb(44, 44, 44);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#indexHeader {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+
+    max-width: 90vw;
+}
+
+#newMovieDiv {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    max-width: 90vw;
+}
