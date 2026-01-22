@@ -32,7 +32,7 @@ app.post("/api/movies", (req, res) => {
     res.json({ success: true });
 });
 
-// Hent alle filmer
+
 app.get("/api/movies", (req, res) => {
     const moviesPath = path.join(__dirname, "movies.json");
 
