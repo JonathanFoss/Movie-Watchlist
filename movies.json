@@ -1,14 +1,27 @@
 [
   {
-    "title": "Test Movie",
-    "createdAt": "2026-01-22T16:26:57.415Z"
-  },
-  {
     "title": "Interstellar",
-    "createdAt": "2026-01-22T16:28:07.175Z"
+    "createdAt": "2026-01-23T22:25:34.781Z",
+    "status": "statusPlan"
   },
   {
-    "title": "Avatar (2009)",
-    "createdAt": "2026-01-22T16:28:22.184Z"
+    "title": "Interstellar2",
+    "createdAt": "2026-01-23T22:25:45.431Z",
+    "status": "statusDropped"
+  },
+  {
+    "title": "Interstellar3",
+    "createdAt": "2026-01-23T22:26:39.862Z",
+    "status": "statusWatched"
+  },
+  {
+    "title": "sherk 3",
+    "createdAt": "2026-01-23T22:30:07.862Z",
+    "status": "statusWatched"
+  },
+  {
+    "title": "test",
+    "createdAt": "2026-01-23T22:30:17.425Z",
+    "status": "statusDropped"
   }
 ]
