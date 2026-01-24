@@ -33,6 +33,25 @@ app.post("/api/movies", (req, res) => {
         res.json({ success: true });
 });
 
+app.patch("/api/moviesEdit", (req, res) => {
+    const { title, status } = req.body;
+
+    if (!title) {
+        return res.status(400).json({ error: "Missing title" });
+    }
+
+        const movies = JSON.parse(fs.readFileSync(moviesPath, "utf-8"));
+
+        movies.push({
+            title,
+            createdAt: new Date().toISOString(),
+            status
+        });
+
+        fs.writeFileSync(moviesPath, JSON.stringify(movies, null, 2));
+
+        res.json({ success: true });
+});
 
 app.get("/api/movies", (req, res) => {
     const moviesPath = path.join(__dirname, "movies.json");

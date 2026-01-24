@@ -62,8 +62,6 @@ async function fetchMovies() {
                 movieTimeAdded.textContent = `Date added: ${formattedDate}`;
                 movieContainer.appendChild(movieTimeAdded);
 
-
-
                 // SAMLER ALT I EN LISTE
                 movieListUl.appendChild(movieContainer);
                 
