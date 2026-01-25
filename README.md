@@ -8,3 +8,23 @@ My vision is that people can go to other peoples pages and see what they think o
 FEATURE MAP can be found at https://github.com/users/JonathanFoss/projects/1
 
 I have put express moduels in gitIgnore so its abit cleaner, if you wish to download just run NMP i express in the Movie-Watchlist folder.
+
+# Movie Watchlist API
+
+Basic scaffold api added for my movie app.
+
+## Endpoints
+
+### GET /movies
+List out all movies added by user.
+
+### POST /movies
+Lets the user add new movie entries.
+
+### PATCH /movies/:id
+Updates existing movie entry.
+
+### DELETE /movies/:id
+Removes movie from list.
+
+
