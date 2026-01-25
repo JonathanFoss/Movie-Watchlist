@@ -27,4 +27,6 @@ Updates existing movie entry.
 ### DELETE /movies/:id
 Removes movie from list.
 
+# Middleware
 
+I chose to create a middleware to check for existing titles in the movie list. This is so that the user doesn't add the same movie allready.
