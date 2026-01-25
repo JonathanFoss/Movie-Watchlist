@@ -29,5 +29,11 @@ Removes movie from list.
 
 # Middleware
 
-I chose to create a middleware to check for existing titles in the movie list. This is so that the user doesn't add the same movie allready.
-This has been tested in Bruno and is currently working as intended.
+## Problem - clean movie lists
+
+Without middleware the user would be able to add the same movie (title) again even if it already exists in the movie list.
+Therefor i wanted to create a middleware that checks to see if the title already is in the list.
+This is so that the user keeps a clean and organized list.
+
+Currently the middleware checks an array, Movies = [], to see if any titles matches the new request. If it does an messages appears and tells the client that it does.
+And does not add the movie to the list. If not the movie gets added as intended for the user.
