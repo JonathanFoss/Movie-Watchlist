@@ -30,3 +30,4 @@ Removes movie from list.
 # Middleware
 
 I chose to create a middleware to check for existing titles in the movie list. This is so that the user doesn't add the same movie allready.
+This has been tested in Bruno and is currently working as intended.
