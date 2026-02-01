@@ -38,5 +38,14 @@ This is so that the user keeps a clean and organized list.
 Currently the middleware checks an array, Movies = [], to see if any titles matches the new request. If it does an messages appears and tells the client that it does.
 And does not add the movie to the list. If not the movie gets added as intended for the user.
 
-## User creation
-You can create an user with a username and password. So no real info is needed, but if this app would be public an E-mail might be needed incase password recovery and mails about updates.
+## Data Privacy Policy:
+
+We only collect the information necessary (username, password, consent) to provide you with access to the service. 
+Your passwords are encrypted and we do not share any personal information with third parties.
+You can delete your account at any time and all personal information will be removed.
+
+## Terms of Service:
+
+The user owns their own data. 
+We grant the user access to the service subject to their agreement to the ToS and Privacy Policy. 
+We reserve the right to moderate or remove content that violates the rules.
