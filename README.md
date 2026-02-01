@@ -38,13 +38,15 @@ This is so that the user keeps a clean and organized list.
 Currently the middleware checks an array, Movies = [], to see if any titles matches the new request. If it does an messages appears and tells the client that it does.
 And does not add the movie to the list. If not the movie gets added as intended for the user.
 
-## Data Privacy Policy:
+#Privacy _(GDPR)_and ToS
+
+## Data Privacy Policy
 
 The app only collect the information necessary _(username, password, consent)_ to provide the user with access. 
 Passwords are encrypted and any personal information is not shared with third parties. _(This is a school project, so .env file is shared!)_
 The user can delete their account at any time and all personal information will be removed.
 
-## Terms of Service:
+## Terms of Service
 
 The user owns their own data. 
 But i might remove or modify their data over the course of this project. _(This is still a university project after all..)_
