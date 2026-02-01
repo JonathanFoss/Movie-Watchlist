@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": "4f6f8d98-ef95-442f-b3e0-3009f9938a3b",
+    "username": "Jonathan",
+    "password": "LMN",
+    "consent": {
+      "tos": true,
+      "privacy": true,
+      "timestamp": "2026-02-01T17:36:28.706Z"
+    },
+    "createdAt": "2026-02-01T17:36:28.707Z"
+  },
+  {
+    "id": "5bc9cac2-b280-4323-b37f-c2271945ce83",
+    "username": "Jonathan2",
+    "password": "LMN",
+    "consent": {
+      "tos": true,
+      "privacy": true,
+      "timestamp": "2026-02-01T17:36:51.170Z"
+    },
+    "createdAt": "2026-02-01T17:36:51.170Z"
+  }
+]
