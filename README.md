@@ -40,12 +40,11 @@ And does not add the movie to the list. If not the movie gets added as intended 
 
 ## Data Privacy Policy:
 
-We only collect the information necessary (username, password, consent) to provide you with access to the service. 
-Your passwords are encrypted and we do not share any personal information with third parties.
-You can delete your account at any time and all personal information will be removed.
+The app only collect the information necessary _(username, password, consent)_ to provide the user with access. 
+Passwords are encrypted and any personal information is not shared with third parties. _(This is a school project, so .env file is shared!)_
+The user can delete their account at any time and all personal information will be removed.
 
 ## Terms of Service:
 
 The user owns their own data. 
-We grant the user access to the service subject to their agreement to the ToS and Privacy Policy. 
-We reserve the right to moderate or remove content that violates the rules.
+But i might remove or modify their data over the course of this project. _(This is still a university project after all..)_
