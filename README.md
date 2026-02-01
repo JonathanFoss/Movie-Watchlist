@@ -38,7 +38,7 @@ This is so that the user keeps a clean and organized list.
 Currently the middleware checks an array, Movies = [], to see if any titles matches the new request. If it does an messages appears and tells the client that it does.
 And does not add the movie to the list. If not the movie gets added as intended for the user.
 
-# Privacy _(GDPR)_and ToS
+# Privacy_(GDPR)_ and ToS
 
 ## Data Privacy Policy
 
