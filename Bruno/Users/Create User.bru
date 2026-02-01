@@ -1,0 +1,25 @@
+meta {
+  name: Create User
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/users
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "Jonathan",
+    "password": "test123",
+    "consent": { "tos": true, "privacy": true }
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
