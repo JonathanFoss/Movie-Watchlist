@@ -1,5 +1,5 @@
 import express from "express";
-import { checkPassword } from "../userService.mjs";
+import { checkPassword } from "../Controllers/userService.mjs";
 
 const loginRouter = express.Router();
 

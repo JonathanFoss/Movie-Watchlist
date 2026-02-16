@@ -1,7 +1,12 @@
 import fs from "node:fs/promises";
+import path from "path";
+import { fileURLToPath } from "node:url";
 import crypto from "node:crypto";
 
-const DB_PATH = "./users.json";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const DB_PATH = path.join(__dirname, "../Data/users.json");
 
 async function readDB() {
   try {
@@ -53,6 +58,26 @@ export async function addUser(username, password, consent) {
 
   return newUser;
 }
+
+// Oppdater brukernavn
+export async function updateUsername(userId, newUsername) {
+  const users = await readDB();
+
+  // Finn brukeren
+  const userIndex = users.findIndex(u => u.id === userId);
+  if (userIndex === -1) return null;
+
+  // Sjekk om det nye brukernavnet allerede finnes
+  if (users.some(u => u.username === newUsername)) {
+    throw new Error("Username already taken");
+  }
+
+  users[userIndex].username = newUsername;
+  await writeDB(users);
+
+  return users[userIndex];
+}
+
 
 // Slett bruker
 export async function deleteUser(userId) {

@@ -1,7 +1,13 @@
 import fs from "node:fs/promises";
+import path from "path";
+import { fileURLToPath } from "node:url";
 import crypto from "node:crypto";
 
-const DB_PATH = "./movieDB.json";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const DB_PATH = path.join(__dirname, "../Data/movieDB.json");
 
 // Hjelpefunksjoner
 async function readDB() {
