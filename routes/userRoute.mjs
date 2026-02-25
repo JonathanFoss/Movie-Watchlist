@@ -1,5 +1,5 @@
 import express from "express";
-import { addUser, deleteUser, updateUsername } from "../Controllers/userService.mjs";
+import { addUser, deleteUser, updateUsername } from "../Node Controllers/userService.mjs";
 import requireConsent from "../Middleware/consentMiddleware.mjs";
 
 const userRouter = express.Router();

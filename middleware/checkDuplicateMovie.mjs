@@ -4,7 +4,7 @@
 // Downside here is that if the first person to ever add the movie writes the wrong title it will effect everyone
 // Solution might be to add Admin / Moderators who can go in and do changes to the DB!
 
-import { movieExists } from "../Controllers/movieService.mjs";
+import { movieExists } from "../Node Controllers/movieService.mjs";
 
 export default async function checkDuplicateMovie(req, res, next) {
   const { title } = req.body;

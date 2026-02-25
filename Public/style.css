@@ -5,3 +5,16 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 
 }
+
+#consent {
+
+    color: gray;
+    max-width: 600px;
+
+}
+
+#consent h5 {
+    color: rgb(126, 165, 180);
+    font-weight:900;
+}
+

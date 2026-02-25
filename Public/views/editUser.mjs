@@ -23,8 +23,9 @@ export function showUserInfo() {
     });
 
     deleteAccount.addEventListener("click", () => {
-        confirm("Are you sure you want to delete your account?")
-        deleteUser(userToken);
+        if (confirm("Are you sure you want to delete your account?")) {
+            deleteUser(userToken);
+        }
     })
 
 }
@@ -62,5 +63,6 @@ async function deleteUser(userToken) {
     }
 
     localStorage.clear("userToken");
+    window.location.reload();
     
 }
