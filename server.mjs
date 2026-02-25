@@ -24,11 +24,11 @@ app.use("/movies", movieRouter);
 
 
 
-app.get("/", (req, res) => {
+/* app.get("/", (req, res) => {
 
     res.json({ message: "Movie watchlist API running" });
     
-})
+}) */
 
 app.listen(PORT, () => {
     console.log(`Server is running on localhost:${PORT}`);
