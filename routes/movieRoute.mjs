@@ -1,5 +1,5 @@
 import express from "express";
-import checkDuplicateMovie from "../middleware/checkDuplicateMovie.mjs";
+import checkDuplicateMovie from "../Middleware/checkDuplicateMovie.mjs";
 import { getAllMovies, addMovie } from "../Node Controllers/movieService.mjs";
 
 const movieRouter = express.Router();
