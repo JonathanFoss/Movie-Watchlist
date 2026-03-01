@@ -8,9 +8,19 @@ const userRouter = express.Router();
 userRouter.post("/", requireConsent, async (req, res) => {
   try {
     const { username, password, consent } = req.body;
-    const user = await addUser(username, password, consent);
-    res.status(201).json({ message: "User created", userId: user.id });
+
+    const result = await pool.query(
+      "INSERT INTO users (username, password, consent) VALUES ($1,$2,$3) RETURNING id",
+      [username, password, consent]
+    );
+
+    res.status(201).json({
+      message: "User created",
+      userId: result.rows[0].id
+    });
+
   } catch (err) {
+    // UNIQUE constraint på username vil trigge denne
     res.status(409).json({ message: err.message });
   }
 });
