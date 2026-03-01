@@ -14,8 +14,8 @@ async function createNewUser(username, password, consent){
         const data = await response.json();
         console.log(data);
 
-        userToken = localStorage.setItem("userToken", data.userId);
-        window.location.reload();
+        //userToken = localStorage.setItem("userToken", data.userId);
+        //window.location.reload();
       }
       catch (error) {
         console.log(error);

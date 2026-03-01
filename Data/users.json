@@ -9,5 +9,16 @@
       "timestamp": "2026-02-25T11:56:21.356Z"
     },
     "createdAt": "2026-02-25T11:56:21.356Z"
+  },
+  {
+    "id": "23d20fb8-372b-45d4-a57d-ecd81c79cdcf",
+    "username": "test",
+    "password": "",
+    "consent": {
+      "tos": true,
+      "privacy": true,
+      "timestamp": "2026-03-01T19:58:50.742Z"
+    },
+    "createdAt": "2026-03-01T19:58:50.742Z"
   }
 ]

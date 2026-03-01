@@ -1,5 +1,5 @@
 import express from "express";
-import { addUser, deleteUser, updateUsername } from "../Node Controllers/userService.mjs";
+import { addUser, deleteUser, updateUsername } from "../Node Controllers/userServiceDB.mjs"
 import requireConsent from "../Middleware/consentMiddleware.mjs";
 
 const userRouter = express.Router();
@@ -8,19 +8,9 @@ const userRouter = express.Router();
 userRouter.post("/", requireConsent, async (req, res) => {
   try {
     const { username, password, consent } = req.body;
-
-    const result = await pool.query(
-      "INSERT INTO users (username, password, consent) VALUES ($1,$2,$3) RETURNING id",
-      [username, password, consent]
-    );
-
-    res.status(201).json({
-      message: "User created",
-      userId: result.rows[0].id
-    });
-
+    const user = await addUser(username, password, consent);
+    res.status(201).json({ message: "User created", userId: user.id });
   } catch (err) {
-    // UNIQUE constraint på username vil trigge denne
     res.status(409).json({ message: err.message });
   }
 });
