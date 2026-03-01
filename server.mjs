@@ -8,6 +8,25 @@ import loginRouter from "./routes/loginRoute.mjs"
 const app = express();
 const PORT = 3000;
 
+// REMOVE AFTER
+import pool from "./db/db.mjs";
+
+async function createTable() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      username VARCHAR(100) UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      consent BOOLEAN NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
+}
+
+// REMOVE UP FROM HERE
+
+createTable();
+
 app.use(express.json());
 
 import path from "path";
