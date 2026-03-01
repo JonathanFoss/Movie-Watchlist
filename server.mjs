@@ -9,7 +9,7 @@ const app = express();
 const PORT = 3000;
 
 // REMOVE AFTER
-import pool from "./db/db.mjs";
+import pool from "./Data/usersDB.mjs";
 
 async function createTable() {
   await pool.query(`
