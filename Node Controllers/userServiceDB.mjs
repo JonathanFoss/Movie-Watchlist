@@ -17,6 +17,15 @@ export async function addUser(username, password, consent) {
         throw new Error("User already exists");
     }
 
+        // Brukere må ha disse to!
+        if (!username) {
+                throw new Error("You must have a username!");
+        }
+
+        if (!password) {
+                throw new Error("You must have a password!");
+        }
+
     const hashedPassword = encryptPassword(password);
 
     const result = await pool.query(
