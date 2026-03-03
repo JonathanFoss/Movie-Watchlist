@@ -1,12 +1,12 @@
 import * as hashURL from "../../Node Controllers/pageController.mjs"
 
-async function userLogin(username, password) {
+async function userLogin(inputUsername, inputPassword) {
     
     // !!!!!!!!!!!!!
     // FIKS DET HER!
     const postData = {
-        username: username,
-        password: password
+        username: inputUsername,
+        password: inputPassword
     };
     // !!!!!!!!!!!!!
 
@@ -57,7 +57,7 @@ export function showUserLogin() {
 
     loginButton.addEventListener("click", () => {
         console.log(username.value, userpassword.value);
-        userLogin(username,userpassword);
+        userLogin(username.value,userpassword.value);
     })
 
     const cancel = document.getElementById("cancel");
