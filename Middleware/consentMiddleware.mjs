@@ -1,6 +1,6 @@
 function requireConsent(req, res, next) {
   const { consent } = req.body;
-  if (!consent || !consent.privacy) {
+  if (!consent) {
     return res.status(400).json({ message: "You must accept ToS and Privacy Policy to create an account!" });
   }
   if (!consent.tos) {

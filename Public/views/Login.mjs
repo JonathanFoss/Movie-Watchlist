@@ -5,8 +5,8 @@ async function userLogin(username, password) {
     // !!!!!!!!!!!!!
     // FIKS DET HER!
     const postData = {
-        username: 'Solli',
-        password: '${}'
+        username: username,
+        password: password
     };
     // !!!!!!!!!!!!!
 
@@ -57,7 +57,7 @@ export function showUserLogin() {
 
     loginButton.addEventListener("click", () => {
         console.log(username.value, userpassword.value);
-        userLogin("3");
+        userLogin(username,userpassword);
     })
 
     const cancel = document.getElementById("cancel");
