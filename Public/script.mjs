@@ -1,16 +1,27 @@
-// Her legges inn kode
+import * as views from "./views/views.mjs";
 
-import createUser from "../views/createUser.mjs";
-import showMovies from "../views/userMovieList.mjs";
-import { showUserInfo } from "../views/editUser.mjs";
+const isUserLoggedIn = localStorage.getItem("loggedin");
 
-const isUserLoggedIn = localStorage.getItem("userToken");
+function router() {
+    const hash = window.location.hash || "#Home";
 
-if (!isUserLoggedIn) {
-    createUser();
+    switch(hash){
+        case "#Login":
+            views.showUserLogin();
+            break;
+
+        case "#AccountCreation":
+            views.showUserCreation();
+            break;
+
+        case "#movies":
+            views.showMovies();
+            break;
+
+        default:
+            views.showHomePage();
+    }
 }
 
-if(isUserLoggedIn) {
-    showUserInfo()
-}
-
+window.addEventListener("hashchange", router);
+window.addEventListener("load", router);

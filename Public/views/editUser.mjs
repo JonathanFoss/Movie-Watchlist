@@ -30,7 +30,7 @@ export function showUserInfo() {
 
 }
 
-async function editUser(userToken, newUsername) {
+export async function editUser(userToken, newUsername) {
     try {
         const response = await fetch(`/users/${userToken}`, {
             method: "PATCH",

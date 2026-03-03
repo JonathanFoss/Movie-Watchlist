@@ -1,4 +1,5 @@
-let userToken = "";
+import * as hashURL from "../../Node Controllers/pageController.mjs"
+import { generateKey } from "../../Node Controllers/userLoggedIn.mjs"
 
 async function createNewUser(username, password, consent){
 
@@ -12,10 +13,17 @@ async function createNewUser(username, password, consent){
         });
 
         const data = await response.json();
-        console.log(data);
+        if (!response.ok) {
+            // Hvis 401 eller annen feilstatus
+            alert(data.message);
+            return;
+        }
+        //console.log(data);
+        if (response.ok) {
+            hashURL.redirect("#Home");
+            generateKey();
+        }
 
-        //userToken = localStorage.setItem("userToken", data.userId);
-        //window.location.reload();
       }
       catch (error) {
         console.log(error);
@@ -23,9 +31,10 @@ async function createNewUser(username, password, consent){
 
 }
 
-async function showUserCreation() {
+export async function showUserCreation() {
 
     const htmlBody = document.body;
+    htmlBody.innerHTML = "";
     
 
     const div = document.createElement("div");
@@ -35,8 +44,9 @@ async function showUserCreation() {
         div.innerHTML = `
 
             <input id="username" placeholder="Username" autocomplete="off"></input>
-            <input id="password" placeholder="Password" autocomplete="off"></input>
+            <input id="password" placeholder="Password" autocomplete="off" type="password"></input>
             <button id="submitNewUser">Create User</button>
+            <button id="cancel">Cancel</button> 
             <br/>
             <input type="checkbox" id="ToS"> Terms of Service</input>
             <input type="checkbox" id="Privacy"> Privacy Settings</input>
@@ -113,8 +123,9 @@ async function showUserCreation() {
         createNewUser(username, password, consent);
     });
 
+    const cancel = document.getElementById("cancel");
+    hashURL.attachNavigation(cancel,"#Home");
+
 
       
-}
-
-export default showUserCreation;
+};

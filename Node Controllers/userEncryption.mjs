@@ -2,7 +2,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const key = parseInt(process.env.PASSWORD_KEY || "5"); // fallback til 5
+const key = parseInt(process.env.PASSWORD_KEY);
+
+if (!key) {
+  throw new Error("PASSWORD_KEY is not defined in environment variables");
+}
 
 export function encryptPassword(password) {
   let encrypted = "";
