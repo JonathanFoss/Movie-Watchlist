@@ -1,25 +1,74 @@
 import * as views from "./views/views.mjs";
+import hashRoute from "../../Modules/hashRoutes.mjs";
 
-const isUserLoggedIn = localStorage.getItem("loggedin");
+async function checkValidKey(){
 
-function router() {
-    const hash = window.location.hash || "#Home";
+    try {
+        const stored = localStorage.getItem("validatedUser");
+        if(!stored) return false;
 
+        const user = JSON.parse(stored);
+        if(!user?.username || !user?.validationKey) return false;
+
+        const response = await fetch("/login/validate",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                username: user.username,
+                validationKey: user.validationKey
+            })
+        });
+
+        return response.ok;
+
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+let cachedAuthState = null;
+
+async function router(){
+
+    const hash = window.location.hash || hashRoute.Home;
+
+    // render først
     switch(hash){
-        case "#Login":
+
+        case hashRoute.Login:
             views.showUserLogin();
             break;
 
-        case "#AccountCreation":
+        case hashRoute.AccountCreation:
             views.showUserCreation();
             break;
 
-        case "#movies":
+        case "#Movies":
             views.showMovies();
+            break;
+        
+        case hashRoute.Profile:
+            views.showUserInfo();
+            break;
+        
+        case hashRoute.AddMovie:
+            views.showAddMovies();
             break;
 
         default:
             views.showHomePage();
+    }
+
+    // sjekk login etterpå
+    if(cachedAuthState === null){
+        cachedAuthState = await checkValidKey();
+    }
+
+    if(!cachedAuthState && (hash === "#Movies" || hash === "#Profile")){
+        window.location.hash = "#Login";
     }
 }
 

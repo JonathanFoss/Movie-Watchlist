@@ -1,5 +1,5 @@
-import * as hashURL from "../../Node Controllers/pageController.mjs"
-import { generateKey } from "../../Node Controllers/userLoggedIn.mjs"
+import * as hashURL from "../../Modules/pageController.mjs"
+
 
 async function createNewUser(username, password, consent){
 
@@ -20,8 +20,8 @@ async function createNewUser(username, password, consent){
         }
         //console.log(data);
         if (response.ok) {
-            hashURL.redirect("#Home");
-            generateKey();
+            hashURL.redirect("#Login");
+            // REDIRECT TO LOGIN?
         }
 
       }

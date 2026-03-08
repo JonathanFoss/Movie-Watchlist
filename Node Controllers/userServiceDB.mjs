@@ -68,22 +68,25 @@ export async function checkPassword(username, password) {
     return result.rows[0].password === encryptPassword(password);
 }
 
-export async function updateUsername(userId, newUsername) {
-    if (await userExists(newUsername)) {
-        throw new Error("Username already taken");
-    }
+export async function updateUsernameByKey(validationKey, newUsername) {
+  const result = await pool.query(
+    `UPDATE users
+     SET username = $1
+     WHERE validationkey = $2 AND validation_expire > NOW()
+     RETURNING id, username`,
+    [newUsername, validationKey]
+  );
 
-    const result = await pool.query(
-        "UPDATE users SET username = $1 WHERE id = $2 RETURNING *",
-        [newUsername, userId]
-    );
-
-    return result.rows[0] || null;
+  return result.rows[0] || null;
 }
 
-export async function deleteUser(userId) {
-    await pool.query(
-        "DELETE FROM users WHERE id = $1",
-        [userId]
-    );
+export async function deleteUserByKey(validationKey) {
+  const result = await pool.query(
+    `DELETE FROM users
+     WHERE validationkey = $1 AND validation_expire > NOW()
+     RETURNING id`,
+    [validationKey]
+  );
+
+  return result.rows[0] ? true : false;
 }

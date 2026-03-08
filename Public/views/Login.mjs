@@ -1,38 +1,46 @@
-import * as hashURL from "../../Node Controllers/pageController.mjs"
+import * as hashURL from "../../Modules/pageController.mjs"
 
 async function userLogin(inputUsername, inputPassword) {
     
-    // !!!!!!!!!!!!!
-    // FIKS DET HER!
-    const postData = {
-        username: inputUsername,
-        password: inputPassword
-    };
-    // !!!!!!!!!!!!!
-
     try {
         const response = await fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(postData),
+            body: JSON.stringify({
+                username: inputUsername,
+                password: inputPassword
+            }),
         });
 
         const data = await response.json();
 
         if (!response.ok) {
-            // Hvis 401 eller annen feilstatus
-            alert(data.message);
-            return;
+            alert(data.message || "Login failed");
+            return false;
         }
 
+        // Lagre login-data i localStorage
+        if (data.validationKey) {
+            localStorage.setItem("validatedUser", JSON.stringify({
+                username: inputUsername,
+                validationKey: data.validationKey
+            }));
+        }
+
+        if (response.ok) {
+                    hashURL.redirect("#Home");
+                }
+
         console.log("Login success:", data);
+        return true;
 
     } catch (error) {
         console.error("Network error:", error);
+        return false;
     }
-};
+}
 
 export function showUserLogin() {
     const htmlBody = document.body;
@@ -44,7 +52,7 @@ export function showUserLogin() {
     htmlBody.innerHTML =
     `
 
-        <input placeholder="Username" id="username"></input>
+        <input placeholder="Username" id="username" autocomplete="off"></input>
         <input placeholder="Password" id="password" type="password" autocomplete="off"></input>
         <button id="login">Login</button>
         <button id="cancel">Cancel</button>

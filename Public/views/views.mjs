@@ -1,14 +1,18 @@
+// test.mjs // USED FOR TESTING!!
+export { testPage } from "./Test.mjs"
+
+
 // Home.mjs
-export { showHomePage } from "../views/home.mjs"
+export { showHomePage } from "./Home.mjs"
 
 // createUser.mjs
-export { showUserCreation } from "../views/createUser.mjs";
+export * from "../views/CreateUser.mjs";
 
 // userMovieList.mjs
 export { showMovies } from "../views/userMovieList.mjs";
 
-// editUser.mjs
-export { showUserInfo, editUser} from "../views/editUser.mjs";
+// Profile.mjs
+export { showUserInfo, editUser} from "../views/Profile.mjs";
 
 // Login.mjs
 export { showUserLogin } from "../views/Login.mjs";

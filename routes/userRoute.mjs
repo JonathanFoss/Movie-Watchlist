@@ -1,5 +1,5 @@
 import express from "express";
-import { addUser, deleteUser, updateUsername } from "../Node Controllers/userServiceDB.mjs"
+import { addUser, deleteUserByKey, updateUsernameByKey } from "../Node Controllers/userServiceDB.mjs"
 import requireConsent from "../Middleware/consentMiddleware.mjs";
 
 const userRouter = express.Router();
@@ -15,18 +15,25 @@ userRouter.post("/", requireConsent, async (req, res) => {
   }
 });
 
-// Oppdater brukernavn
-userRouter.patch("/:id", async (req, res) => {
+// Oppdater brukernavn via validationKey
+userRouter.patch("/:validationKey", async (req, res) => {
   try {
     const { newUsername } = req.body;
+    const validationKey = req.params.validationKey;
+
     if (!newUsername) {
       return res.status(400).json({ message: "newUsername is required" });
     }
 
-    const updatedUser = await updateUsername(req.params.id, newUsername);
+    if (!validationKey) {
+      return res.status(401).json({ message: "Validation key missing" });
+    }
+
+    // Her bør du ha funksjon som finner bruker via validKey
+    const updatedUser = await updateUsernameByKey(validationKey, newUsername);
 
     if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found or key expired" });
     }
 
     res.json({ message: "Username updated", userId: updatedUser.id });
@@ -35,13 +42,23 @@ userRouter.patch("/:id", async (req, res) => {
   }
 });
 
-
-// Slett bruker
-userRouter.delete("/:id", async (req, res) => {
+// Slett bruker via validationKey
+userRouter.delete("/:validationKey", async (req, res) => {
   try {
-    await deleteUser(req.params.id);
+    const validationKey = req.params.validationKey;
+
+    if (!validationKey) {
+      return res.status(401).json({ message: "Validation key missing" });
+    }
+
+    const success = await deleteUserByKey(validationKey);
+
+    if (!success) {
+      return res.status(404).json({ message: "User not found or key expired" });
+    }
+
     res.json({ message: "User deleted" });
-  } catch {
+  } catch (err) {
     res.status(500).json({ message: "Error deleting user" });
   }
 });
