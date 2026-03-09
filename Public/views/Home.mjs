@@ -27,6 +27,8 @@ export function showHomePage() {
                 <button id="showLogin">Login</button>
             </div>
 
+        <h3> Logged in? Refresh the page!</h3>
+        <button id="refresh"> Refresh </button>
         
         `
 
@@ -35,6 +37,11 @@ export function showHomePage() {
 
         const createAccount = document.getElementById("showAccountCreation");
         hashURL.attachNavigation(createAccount,"#AccountCreation")
+
+        const refresh = document.getElementById("refresh")
+        refresh.addEventListener("click", () => {
+            hashURL.refresh();
+        })
 
     }
     
@@ -45,7 +52,7 @@ export function showHomePage() {
         
             <button id="showProfile"> Profile </button>
             <button> My movie list </button>
-            <button> Add Movie </button>
+            <button id="addMovie"> Add Movie </button>
 
             <br/>
             
@@ -56,6 +63,9 @@ export function showHomePage() {
 
         const profile = document.getElementById("showProfile");
         hashURL.attachNavigation(profile, hashRoute.Profile);
+
+        const addMovie = document.getElementById("addMovie");
+        hashURL.attachNavigation(addMovie, hashRoute.AddMovie);
 
     }
 };

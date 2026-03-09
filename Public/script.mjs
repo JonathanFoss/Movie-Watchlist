@@ -1,6 +1,14 @@
 import * as views from "./views/views.mjs";
 import hashRoute from "../../Modules/hashRoutes.mjs";
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service_worker.mjs')
+      .then(reg => console.log('Service Worker registered', reg))
+      .catch(err => console.log('Service Worker failed', err));
+  });
+}
+
 async function checkValidKey(){
 
     try {

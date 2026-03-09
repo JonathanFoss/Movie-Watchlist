@@ -1,7 +1,12 @@
+import hashRoute from "../../Modules/hashRoutes.mjs";
 import * as hashURL from "../../Modules/pageController.mjs"
+import { loadLanguage, t } from '../frontend_i18n.mjs';
 
 async function userLogin(inputUsername, inputPassword) {
-    
+
+    const lang = navigator.language.startsWith("no") ? "no" : "en";
+    await loadLanguage(lang);
+
     try {
         const response = await fetch('/login', {
             method: 'POST',
@@ -17,7 +22,7 @@ async function userLogin(inputUsername, inputPassword) {
         const data = await response.json();
 
         if (!response.ok) {
-            alert(data.message || "Login failed");
+            alert(t("login_failed"));
             return false;
         }
 
@@ -29,15 +34,11 @@ async function userLogin(inputUsername, inputPassword) {
             }));
         }
 
-        if (response.ok) {
-                    hashURL.redirect("#Home");
-                }
-
-        console.log("Login success:", data);
+        console.log(t("login_sucess"), data);
         return true;
 
     } catch (error) {
-        console.error("Network error:", error);
+        console.error(t("network_error"), error);
         return false;
     }
 }
@@ -63,9 +64,17 @@ export function showUserLogin() {
     const username = document.getElementById("username");
     const userpassword = document.getElementById("password");
 
-    loginButton.addEventListener("click", () => {
-        console.log(username.value, userpassword.value);
-        userLogin(username.value,userpassword.value);
+    loginButton.addEventListener("click", async () => {
+        //console.log(username.value, userpassword.value);
+
+        const success = await userLogin(username.value,userpassword.value);
+
+        if (success) {
+        // Liten Bug => Homepage viser feil etter login, må refreshe for å kunne se riktig.
+        setTimeout(() => {
+            hashURL.redirect(hashRoute.Home);
+        }, 0);
+    }
     })
 
     const cancel = document.getElementById("cancel");

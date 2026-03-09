@@ -3,16 +3,16 @@ export { testPage } from "./Test.mjs"
 
 
 // Home.mjs
-export { showHomePage } from "./Home.mjs"
+export * from "../views/Home.mjs"
 
 // createUser.mjs
 export * from "../views/CreateUser.mjs";
 
-// userMovieList.mjs
-export { showMovies } from "../views/userMovieList.mjs";
+// AddMovies.mjs
+export * from "../views/AddMovies.mjs";
 
 // Profile.mjs
-export { showUserInfo, editUser} from "../views/Profile.mjs";
+export * from "../views/Profile.mjs";
 
 // Login.mjs
-export { showUserLogin } from "../views/Login.mjs";
+export * from "../views/Login.mjs";

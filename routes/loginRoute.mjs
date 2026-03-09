@@ -3,31 +3,36 @@ import { checkPassword } from "../Node Controllers/userServiceDB.mjs";
 import { giveUserValidKey } from "../Node Controllers/userLoggedIn.mjs";
 import { generateValidKey } from "../Modules/validationKey.mjs";
 import { checkUserValidKey } from "../Middleware/checkUserValidKey.mjs";
+import { getLang, getMessages } from "../Modules/i18n.mjs"
 
 const loginRouter = express.Router();
 
 /* ================= LOGIN ================= */
 
 loginRouter.post("/", async (req, res) => {
+
+  const lang = getLang(req);
+  const messages = await getMessages(lang);
+
   const { username, password } = req.body;
 
   const valid = await checkPassword(username, password);
 
   if (!valid) {
-    return res.status(401).json({ message: "Invalid username or password" });
+    return res.status(401).json({ message: messages.login_error });
   }
 
   const validationKey = generateValidKey();
   const saveValidKey = await giveUserValidKey(username, validationKey);
 
-  if (!saveValidKey) {
-    return res.status(500).json({ message: "Could not set login key!" });
-  }
+ if (!saveValidKey) {
+  return res.status(500).json({ message: messages.authToken_error });
+}
 
-  return res.status(200).json({
-    message: "Login successful",
-    validationKey: validationKey
-  });
+return res.status(200).json({
+  message: messages.login_success,
+  validationKey: validationKey
+});
 });
 
 /* ================= VALIDATE ================= */
