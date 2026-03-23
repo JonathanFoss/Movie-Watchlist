@@ -25,7 +25,7 @@ export async function giveUserValidKey(username, validationKey) {
          SET validationkey = $1,
              validation_expire = $2
          WHERE username = $3
-         RETURNING id`,
+         RETURNING userid`,
         [validationKey, expireTime, username]
     );
 
@@ -35,5 +35,5 @@ export async function giveUserValidKey(username, validationKey) {
         return null;
     }
 
-    return result.rows[0].id;
+    return result.rows[0].userid;
 }

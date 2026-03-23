@@ -31,13 +31,13 @@ export async function addUser(username, password, consent) {
 
     const result = await pool.query(
         `INSERT INTO users 
-        (id, username, password, consent, created_at)
+        (userId, username, password, consent, created_at)
         VALUES (DEFAULT, $1, $2, $3, NOW())
-        RETURNING id`,
+        RETURNING userId`,
         [username, hashedPassword, JSON.stringify(consent)]
     );
 
-    return { id: result.rows[0].id };
+    return { userId: result.rows[0].userId };
 }
 
 export async function userExists(username) {
@@ -73,7 +73,7 @@ export async function updateUsernameByKey(validationKey, newUsername) {
     `UPDATE users
      SET username = $1
      WHERE validationkey = $2 AND validation_expire > NOW()
-     RETURNING id, username`,
+     RETURNING userId, username`,
     [newUsername, validationKey]
   );
 
@@ -84,7 +84,7 @@ export async function deleteUserByKey(validationKey) {
   const result = await pool.query(
     `DELETE FROM users
      WHERE validationkey = $1 AND validation_expire > NOW()
-     RETURNING id`,
+     RETURNING userId`,
     [validationKey]
   );
 

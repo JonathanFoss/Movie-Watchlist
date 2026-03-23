@@ -39,9 +39,7 @@ export function showHomePage() {
         hashURL.attachNavigation(createAccount,"#AccountCreation")
 
         const refresh = document.getElementById("refresh")
-        refresh.addEventListener("click", () => {
-            hashURL.refresh();
-        })
+        refresh.addEventListener("click", hashURL.refresh);
 
     }
     
@@ -56,13 +54,21 @@ export function showHomePage() {
 
             <br/>
             
-            <button> Log Out </button>
+            <button id="logout"> Log Out </button>
 
 
         `;
 
         const profile = document.getElementById("showProfile");
         hashURL.attachNavigation(profile, hashRoute.Profile);
+
+        const logout = document.getElementById("logout");
+        logout.addEventListener("click", () =>{
+            localStorage.clear("validatedUser");
+            setTimeout(() => {
+                hashURL.refresh();
+            }, 2000);
+        })
 
         const addMovie = document.getElementById("addMovie");
         hashURL.attachNavigation(addMovie, hashRoute.AddMovie);

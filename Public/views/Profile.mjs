@@ -23,28 +23,41 @@ export function showUserInfo() {
         <br/>
         <h4> show date for creation? </h4>
         <button id="back">Back</button>
+
+        <br/>
+        <br/>
+        <div id="responseBox"></div>
     `;
 
     document.body.appendChild(div);
 
-    document.getElementById("submitChanges").addEventListener("click", () => {
-        const usernameInput = document.getElementById("username").value;
+const responseBox = document.getElementById("responseBox");
 
-        editUser(user.validationKey, usernameInput);
+document.getElementById("submitChanges").addEventListener("click", async () => {
+
+    const usernameInput = document.getElementById("username").value;
+
+    const editUserResponse = await editUser(user.validationKey, usernameInput);
+    console.log(editUserResponse);
+
+    if( await editUserResponse?.message) {
 
         let updatedValidKey = JSON.stringify({
-            username : usernameInput,
-            validationKey : user.validationKey
+            username: usernameInput,
+            validationKey: user.validationKey
         });
 
         localStorage.setItem("validatedUser", updatedValidKey);
 
-        setTimeout(() => {
-            hashURL.refresh();
-        }, 2000);
+        responseBox.innerText = editUser.message.JSON.stringify /* "Change successful, Refreshing shortly.." */;
 
+    } else {
 
-    });
+        responseBox.innerText = editUser.message;
+
+    }
+
+});
 
     document.getElementById("deleteAccount").addEventListener("click", () => {
         if (confirm("Are you sure you want to delete your account?")) {
@@ -52,9 +65,7 @@ export function showUserInfo() {
         }
     });
 
-    document.getElementById("back").addEventListener("click", () => {
-        hashURL.back();
-    })
+    document.getElementById("back").addEventListener("click", hashURL.back);
 }
 
 export async function editUser(userToken, newUsername) {
@@ -67,10 +78,12 @@ export async function editUser(userToken, newUsername) {
             body: JSON.stringify({ newUsername })
         });
 
-        console.log(await response.json());
+        const data = await response.json();
+        return data;
 
     } catch (error) {
         console.log(error);
+        return null;
     }
 }
 

@@ -70,10 +70,19 @@ export function showUserLogin() {
         const success = await userLogin(username.value,userpassword.value);
 
         if (success) {
-        // Liten Bug => Homepage viser feil etter login, må refreshe for å kunne se riktig.
+        // redirect tilbake til home, med en refresh for å få opp riktig versjon av homepage.
+
+        htmlBody.innerHTML += `
+        <br/>
+        <br/>
+        Login successful, redirecting shortly..
+
+        `
+
         setTimeout(() => {
             hashURL.redirect(hashRoute.Home);
-        }, 0);
+            hashURL.refresh();
+        }, 3000);
     }
     })
 
