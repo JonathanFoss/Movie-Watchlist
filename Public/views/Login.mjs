@@ -8,7 +8,7 @@ async function userLogin(inputUsername, inputPassword) {
     await loadLanguage(lang);
 
     try {
-        const response = await fetch('https://movie-watchlist-vmjd.onrender.com/login', {
+        const response = await fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
