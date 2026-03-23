@@ -49,11 +49,11 @@ document.getElementById("submitChanges").addEventListener("click", async () => {
 
         localStorage.setItem("validatedUser", updatedValidKey);
 
-        responseBox.innerText = editUser.message.JSON.stringify /* "Change successful, Refreshing shortly.." */;
+        responseBox.innerText = "Change successful, Refreshing shortly..";
 
     } else {
 
-        responseBox.innerText = editUser.message;
+        responseBox.innerText = "something went wrong!?"
 
     }
 

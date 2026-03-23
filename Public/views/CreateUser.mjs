@@ -4,7 +4,7 @@ import * as hashURL from "../../Modules/pageController.mjs"
 async function createNewUser(username, password, consent){
 
         try {
-            const response = await fetch("/users", {
+            const response = await fetch("https://movie-watchlist-vmjd.onrender.com/users", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
