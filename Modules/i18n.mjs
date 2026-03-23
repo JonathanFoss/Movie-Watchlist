@@ -11,7 +11,7 @@ export function getLang(req) {
 }
 
 export async function getMessages(lang) {
-  const filePath = path.join(__dirname, "../locales", `${lang}.json`);
+  const filePath = path.join(__dirname, "../Locales", `${lang}.json`);
   const data = await fs.readFile(filePath, "utf-8");
-  return JSON.parse(data); // parse JSON til JS-objekt
+  return JSON.parse(data);
 }
