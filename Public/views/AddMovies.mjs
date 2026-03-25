@@ -10,6 +10,8 @@ export function showAddMovies(){
     
     const body = document.body;
 
+    body.innerHTML = "";
+
     if (userLoggedin === true) {
         
             body.innerHTML = "";
