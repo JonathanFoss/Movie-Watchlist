@@ -1,24 +1,63 @@
-import * as hashURL from "../../Modules/pageController.mjs"
+import * as hashURL from "../../Modules/pageController.mjs";
 import hashRoute from "../../Modules/hashRoutes.mjs";
+import { logincheck } from "../../Modules/logincheck.mjs";
+import addMovie from "../../Modules/addMovie.mjs";
 
 export function showAddMovies(){
 
-
+    const userLoggedin = logincheck();
     const body = document.body;
-    body.innerHTML = "";
 
-    body.innerHTML +=
-    `
+    if (userLoggedin === true) {
+        
+            body.innerHTML = "";
 
-    <input placeholder="Movie Title"></input>
-    <button> Add Movie </button>
+            body.innerHTML +=
+            `
 
-    <button id="back"> Back </button>
+            <input placeholder="Movie Title" id="movieTitle"></input>
+            <button id="submitMovieEntry"> Add Movie </button>
 
-    `
+            <button id="back"> Back </button>
+            <br/>
+            <br/>
+            <button id="movielist"> List of movies </button>
+            <br/>
+            <h3 id="respone"></h3>
 
-    const back = document.getElementById("back");
-    back.addEventListener("click", hashURL.back);
+            `
+
+            const back = document.getElementById("back");
+            back.addEventListener("click", hashURL.back);
+
+            document.getElementById("submitMovieEntry").addEventListener("click", () => {
+                const movieTitle = document.getElementById("movieTitle").value;
+                addMovie(movieTitle);
+            });
+
+            const showMediaList = document.getElementById("movielist");
+            hashURL.attachNavigation(showMediaList, hashRoute.MediaList);
+
+    }
+
+    else {
+         body.innerHTML = "";
+
+            body.innerHTML =
+            `
+
+            <h2> You're currently not logged in! </h2>
+            <h3> Log in to add movies! </h3>
+
+            <button id="login"> Log in </button>
+
+            `
+
+            const loginbutton = document.getElementById("login");
+            hashURL.attachNavigation(loginbutton, hashRoute.Login);
+            
+    }
+    
 
 }
 

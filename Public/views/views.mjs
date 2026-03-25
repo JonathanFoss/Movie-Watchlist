@@ -1,6 +1,3 @@
-// test.mjs // USED FOR TESTING!!
-export { testPage } from "./Test.mjs"
-
 
 // Home.mjs
 export * from "../views/Home.mjs"
@@ -16,3 +13,9 @@ export * from "../views/Profile.mjs";
 
 // Login.mjs
 export * from "../views/Login.mjs";
+
+// MediaList.mjs
+export * from "../views/MediaList.mjs";
+
+// UserMovieList.mjs
+export * from "../views/UserMovieList.mjs";

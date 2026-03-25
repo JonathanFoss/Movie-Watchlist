@@ -79,4 +79,34 @@ userRouter.delete("/:validationKey", async (req, res) => {
   }
 });
 
+// For å hente ut igjen bruker id
+
+import pkg from "pg";
+const { Pool } = pkg;
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
+
+userRouter.post("/getUserId", async (req, res) => {
+    const { username, validationKey } = req.body;
+
+    try {
+        const result = await pool.query(
+            "SELECT userID FROM users WHERE username=$1 AND validationKey=$2",
+            [username, validationKey]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.json({ userID: result.rows[0].userid });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Database error" });
+    }
+});
+
 export default userRouter;

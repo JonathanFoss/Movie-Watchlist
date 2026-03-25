@@ -1,13 +1,13 @@
 import * as views from "./views/views.mjs";
 import hashRoute from "../../Modules/hashRoutes.mjs";
 
-if ('serviceWorker' in navigator) {
+/* if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service_worker.mjs')
       .then(reg => console.log('Service Worker registered', reg))
       .catch(err => console.log('Service Worker failed', err));
   });
-}
+} */
 
 async function checkValidKey(){
 
@@ -40,10 +40,10 @@ async function checkValidKey(){
 let cachedAuthState = null;
 
 async function router(){
-
+    
     const hash = window.location.hash || hashRoute.Home;
 
-    // render først
+    //console.log(hash);
     switch(hash){
 
         case hashRoute.Login:
@@ -53,10 +53,6 @@ async function router(){
         case hashRoute.AccountCreation:
             views.showUserCreation();
             break;
-
-        case "#Movies":
-            views.showMovies();
-            break;
         
         case hashRoute.Profile:
             views.showUserInfo();
@@ -65,11 +61,19 @@ async function router(){
         case hashRoute.AddMovie:
             views.showAddMovies();
             break;
+        
+        case hashRoute.MediaList:
+            views.showMediaList();
+            break;
+        
+        case hashRoute.UserList:
+            views.showUserList();
+            break;
 
         default:
             views.showHomePage();
     }
-
+/* 
     // sjekk login etterpå
     if(cachedAuthState === null){
         cachedAuthState = await checkValidKey();
@@ -77,7 +81,7 @@ async function router(){
 
     if(!cachedAuthState && (hash === "#Movies" || hash === "#Profile")){
         window.location.hash = "#Login";
-    }
+    } */
 }
 
 window.addEventListener("hashchange", router);

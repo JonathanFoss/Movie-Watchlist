@@ -33,10 +33,10 @@ export function showHomePage() {
         `
 
         const login = document.getElementById("showLogin");
-        hashURL.attachNavigation(login,"#Login");
+        hashURL.attachNavigation(login, hashRoute.Login);
 
         const createAccount = document.getElementById("showAccountCreation");
-        hashURL.attachNavigation(createAccount,"#AccountCreation")
+        hashURL.attachNavigation(createAccount, hashRoute.AccountCreation)
 
         const refresh = document.getElementById("refresh")
         refresh.addEventListener("click", hashURL.refresh);
@@ -45,11 +45,15 @@ export function showHomePage() {
     
     else {
 
+        const validatedUser = JSON.parse(localStorage.getItem("validatedUser"));
+
         htmlBody.innerHTML =
         `
-        
+            <h1>${validatedUser.username}</h1>
+
+
             <button id="showProfile"> Profile </button>
-            <button> My movie list </button>
+            <button id="myList"> My movie list </button>
             <button id="addMovie"> Add Movie </button>
 
             <br/>
@@ -72,6 +76,9 @@ export function showHomePage() {
 
         const addMovie = document.getElementById("addMovie");
         hashURL.attachNavigation(addMovie, hashRoute.AddMovie);
+
+        const userList = document.getElementById("myList");
+        hashURL.attachNavigation(userList, hashRoute.UserList);
 
     }
 };
