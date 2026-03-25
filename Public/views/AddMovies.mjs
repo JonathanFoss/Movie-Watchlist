@@ -3,9 +3,11 @@ import hashRoute from "../../Modules/hashRoutes.mjs";
 import { logincheck } from "../../Modules/logincheck.mjs";
 import addMovie from "../../Modules/addMovie.mjs";
 
+const userLoggedin = logincheck();
+
 export function showAddMovies(){
 
-    const userLoggedin = logincheck();
+    
     const body = document.body;
 
     if (userLoggedin === true) {

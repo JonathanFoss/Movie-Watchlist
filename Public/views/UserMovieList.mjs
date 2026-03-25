@@ -4,10 +4,11 @@ import { logincheck } from "../../Modules/logincheck.mjs";
 
 import { getUserMovies } from "../../Modules/getUserList.mjs"
 
+const isUserLoggedin = logincheck();
 
 export async function showUserList() {
 
-    const isUserLoggedin = logincheck();
+    
 
     if (isUserLoggedin === true) {
 
