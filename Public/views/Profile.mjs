@@ -1,3 +1,4 @@
+import hashRoute from "../../Modules/hashRoutes.mjs";
 import * as hashURL from "../../Modules/pageController.mjs"
 
 const validatedUser = localStorage.getItem("validatedUser");
@@ -50,6 +51,10 @@ document.getElementById("submitChanges").addEventListener("click", async () => {
 
         responseBox.innerText = "Change successful, Refreshing shortly..";
 
+        setTimeout(() => {
+             hashURL.refresh();
+        }, 2000);
+
     } else {
 
         responseBox.innerText = "something went wrong!?"
@@ -86,23 +91,37 @@ export async function editUser(userToken, newUsername) {
     }
 }
 
-async function deleteUser(userToken) {
-    try {
-        const response = await fetch(`/users/${userToken}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+async function deleteUser() {
+  try {
+    const validatedUser = JSON.parse(localStorage.getItem("validatedUser"));
 
-        console.log(await response.json());
-
-    } catch (error) {
-        console.log(error);
+    if (!validatedUser) {
+      console.log("Ingen brukerinformasjon funnet.");
+      return;
     }
 
-    localStorage.removeItem("validatedUser");
-    localStorage.removeItem("validationKey");
+    const res = await fetch("/users/deleteAccount", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: validatedUser.username,
+        validationKey: validatedUser.validationKey
+      })
+    });
 
-    window.location.reload();
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
+      localStorage.removeItem("validatedUser");
+      window.location.reload();
+    } else {
+      alert(data.message);
+    }
+
+  } catch (error) {
+    console.error("Feil ved sletting:", error);
+  }
 }

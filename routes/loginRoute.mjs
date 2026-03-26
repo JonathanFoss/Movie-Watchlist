@@ -7,8 +7,6 @@ import { getLang, getMessages } from "../Modules/i18n.mjs"
 
 const loginRouter = express.Router();
 
-/* ================= LOGIN ================= */
-
 loginRouter.post("/", async (req, res) => {
 
   const lang = getLang(req);
@@ -34,8 +32,6 @@ return res.status(200).json({
   validationKey: validationKey
 });
 });
-
-/* ================= VALIDATE ================= */
 
 loginRouter.post("/validate", async (req, res) => {
   const { username, validationKey } = req.body;

@@ -17,7 +17,6 @@ export async function addUser(username, password, consent) {
         throw new Error("User already exists");
     }
 
-        // Brukere må ha disse to!
         if (!username) {
                 throw new Error("You must have a username!");
                 
@@ -80,12 +79,25 @@ export async function updateUsernameByKey(validationKey, newUsername) {
   return result.rows[0] || null;
 }
 
-export async function deleteUserByKey(validationKey) {
+export async function deleteUserByUsernameAndKey(username, validationKey) {
+
+  const userResult = await pool.query(
+    `SELECT userId FROM users WHERE username = $1 AND validationkey = $2 AND validation_expire > NOW()`,
+    [username, validationKey]
+  );
+
+  if (!userResult.rows[0]) return false;
+
+  const userId = userResult.rows[0].userid;
+
+  await pool.query(
+    `DELETE FROM user_movies WHERE userId = $1`,
+    [userId]
+  );
+
   const result = await pool.query(
-    `DELETE FROM users
-     WHERE validationkey = $1 AND validation_expire > NOW()
-     RETURNING userId`,
-    [validationKey]
+    `DELETE FROM users WHERE userId = $1 RETURNING userId`,
+    [userId]
   );
 
   return result.rows[0] ? true : false;

@@ -26,7 +26,6 @@ async function userLogin(inputUsername, inputPassword) {
             return false;
         }
 
-        // Lagre login-data i localStorage
         if (data.validationKey) {
             localStorage.setItem("validatedUser", JSON.stringify({
                 username: inputUsername,
@@ -70,7 +69,6 @@ export function showUserLogin() {
         const success = await userLogin(username.value,userpassword.value);
 
         if (success) {
-        // redirect tilbake til home, med en refresh for å få opp riktig versjon av homepage.
 
         htmlBody.innerHTML += `
         <br/>

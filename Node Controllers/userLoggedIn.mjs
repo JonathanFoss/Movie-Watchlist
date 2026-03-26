@@ -18,7 +18,7 @@ const pool = new Pool({
 export async function giveUserValidKey(username, validationKey) {
 
     const expireTime = new Date();
-    expireTime.setHours(expireTime.getHours() + 24); // 24 timer session
+    expireTime.setHours(expireTime.getHours() + 24);
 
     const result = await pool.query(
         `UPDATE users 

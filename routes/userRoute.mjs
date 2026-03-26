@@ -1,11 +1,18 @@
 import express from "express";
-import { addUser, deleteUserByKey, updateUsernameByKey } from "../Node Controllers/userServiceDB.mjs";
+import { addUser, deleteUserByUsernameAndKey, updateUsernameByKey } from "../Node Controllers/userServiceDB.mjs";
 import requireConsent from "../Middleware/consentMiddleware.mjs";
 import { getLang, getMessages } from "../Modules/i18n.mjs";
 
+import pkg from "pg";
+const { Pool } = pkg;
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
+
 const userRouter = express.Router();
 
-// Opprett bruker
 userRouter.post("/", requireConsent, async (req, res) => {
   try {
     const lang = getLang(req);
@@ -22,7 +29,6 @@ userRouter.post("/", requireConsent, async (req, res) => {
   }
 });
 
-// Oppdater brukernavn via validationKey
 userRouter.patch("/:validationKey", async (req, res) => {
   try {
     const lang = getLang(req);
@@ -53,40 +59,31 @@ userRouter.patch("/:validationKey", async (req, res) => {
   }
 });
 
-// Slett bruker via validationKey
-userRouter.delete("/:validationKey", async (req, res) => {
+userRouter.delete("/deleteAccount", async (req, res) => {
   try {
     const lang = getLang(req);
     const messages = await getMessages(lang);
 
-    const validationKey = req.params.validationKey;
+    const { username, validationKey } = req.body;
 
-    if (!validationKey) {
-      return res.status(401).json({ message: messages.validation_key_missing });
+    if (!username || !validationKey) {
+      return res.status(400).json({ message: messages.validation_key_missing });
     }
 
-    const success = await deleteUserByKey(validationKey);
+    const success = await deleteUserByUsernameAndKey(username, validationKey);
 
     if (!success) {
       return res.status(404).json({ message: messages.user_not_found });
     }
 
     res.json({ message: messages.user_deleted });
+
   } catch (err) {
+    console.error(err);
     const lang = getLang(req);
     const messages = await getMessages(lang);
     res.status(500).json({ message: messages.delete_error || err.message });
   }
-});
-
-// For å hente ut igjen bruker id
-
-import pkg from "pg";
-const { Pool } = pkg;
-
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
 });
 
 userRouter.post("/getUserId", async (req, res) => {
