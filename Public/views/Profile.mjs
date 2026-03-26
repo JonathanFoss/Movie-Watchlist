@@ -21,7 +21,6 @@ export function showUserInfo() {
         <button id="submitChanges">Apply Changes</button>
         <button id="deleteAccount">Delete Account</button>
         <br/>
-        <h4> show date for creation? </h4>
         <button id="back">Back</button>
 
         <br/>

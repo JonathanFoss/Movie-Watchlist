@@ -8,25 +8,28 @@ export async function showMediaList() {
     document.body.innerHTML = `
 
         <h1>List overview</h1>
-
-        <input placeholder="Search"></input>
+        <h4>Not seeing the movie you want? Click "Add Movie" to add it to our database!</h4>
+        <button id="addMovie"> Add Movie </button>
+        
         <button id="back">Back</button>
+
+        <div class="movie-list"></div>
     
     `;
+
+    const addMovie = document.getElementById("addMovie");
+    hashURL.attachNavigation(addMovie, hashRoute.AddMovie);
 
     document.getElementById("back").addEventListener("click", () => {
         hashURL.back();
     })
 
-    // Tar for seg å liste ut alle filmer
     const movies = await getAllMedia();
-
-    //console.log(movies);
 
         movies.forEach(m => {
             const wrapper = document.createElement("div");
+            wrapper.className = "movie-card";
             wrapper.id = `movie-${m.movieid}`;
-            wrapper.style.backgroundColor = "rgba(63, 63, 63, 1)";
 
             const ratingId = `rating-${m.movieid}`;
             const statusId = `status-${m.movieid}`;

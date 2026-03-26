@@ -23,10 +23,7 @@ export function showAddMovies(){
             <button id="submitMovieEntry"> Add Movie </button>
 
             <button id="back"> Back </button>
-            <br/>
-            <br/>
-            <button id="movielist"> List of movies </button>
-            <br/>
+  
             <h3 id="respone"></h3>
 
             `

@@ -54,7 +54,7 @@ export function showHomePage() {
 
             <button id="showProfile"> Profile </button>
             <button id="myList"> My movie list </button>
-            <button id="addMovie"> Add Movie </button>
+            <button id="movieList"> List of movies </button>
 
             <br/>
             
@@ -74,8 +74,8 @@ export function showHomePage() {
             }, 2000);
         })
 
-        const addMovie = document.getElementById("addMovie");
-        hashURL.attachNavigation(addMovie, hashRoute.AddMovie);
+        const movieList = document.getElementById("movieList");
+        hashURL.attachNavigation(movieList, hashRoute.MediaList);
 
         const userList = document.getElementById("myList");
         hashURL.attachNavigation(userList, hashRoute.UserList);

@@ -52,15 +52,28 @@ async function getUserList() {
     userList.forEach(movie => {
 
         const wrapper = document.createElement("div");
+        wrapper.className = "movie-card";
         const formateDate = new Date(movie.dateadded).toLocaleDateString("no-No");
 
         wrapper.innerHTML = `
 
-            <h3>${movie.title}</h3>
-            <h4>${movie.rating}</h4>
-            <h4>${movie.status}</h4>
-            <h5>${formateDate}</h5>
+            <h3 class="movie-title">${movie.title}</h3>
 
+            <div class="movie-meta">
+
+                <div class="movie-rating">
+                    ⭐ ${movie.rating}/5
+                </div>
+
+                <div class="movie-status status-${movie.status}">
+                    ${movie.status}
+                </div>
+
+            </div>
+
+            <div class="movie-date">
+                Added: ${formateDate}
+            </div>
 
         `;
 

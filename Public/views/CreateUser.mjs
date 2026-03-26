@@ -14,14 +14,14 @@ async function createNewUser(username, password, consent){
 
         const data = await response.json();
         if (!response.ok) {
-            // Hvis 401 eller annen feilstatus
+            
             alert(data.message);
             return;
         }
         //console.log(data);
         if (response.ok) {
             hashURL.redirect("#Login");
-            // REDIRECT TO LOGIN?
+            
         }
 
       }
@@ -100,12 +100,9 @@ export async function showUserCreation() {
         
         `;
 
-    /* let inputElements = document.querySelector("input");
-    inputElements.setAttribute("autocomplete", "off"); */
-
     const createUser = document.getElementById("submitNewUser");
     createUser.addEventListener("click", () => {
-        //console.log(document.querySelector("#username").value, document.querySelector("#password").value);
+
         const username = document.querySelector("#username").value;
         const password = document.querySelector("#password").value;
 
@@ -118,8 +115,6 @@ export async function showUserCreation() {
         }
 
         console.log(username, password, consent);
-
-        // Sender det til appen
         createNewUser(username, password, consent);
     });
 
