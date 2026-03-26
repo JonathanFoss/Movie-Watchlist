@@ -71,7 +71,8 @@ export async function updateUsernameByKey(validationKey, newUsername) {
   const result = await pool.query(
     `UPDATE users
      SET username = $1
-     WHERE validationkey = $2 AND validation_expire > NOW()
+     WHERE validationkey = $2
+       AND validation_expire > NOW()
      RETURNING userId, username`,
     [newUsername, validationKey]
   );
